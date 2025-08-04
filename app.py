@@ -9,6 +9,7 @@ from matplotlib.patches import Polygon
 import io
 import base64
 import json
+import os
 
 app = Flask(__name__)
 CORS(app)  # Permitir requisições do React (localhost:3000)
@@ -470,13 +471,7 @@ def get_examples():
     })
 
 if __name__ == '__main__':
-    print("🐍 Servidor Python Simplex iniciado!")
-    print("🌐 URL: http://localhost:5000")
-    print("📊 Endpoints disponíveis:")
-    print("   GET  /api/health    - Status do servidor")
-    print("   POST /api/solve     - Resolver problema simplex")
-    print("   GET  /api/examples  - Exemplos predefinidos")
-    print("\n💡 Para testar:")
-    print("   curl http://localhost:5000/api/health")
+    port = int(os.environ.get("PORT", 5000))
+    app.run(debug=True, host='0.0.0.0', port=port)
     
     app.run(debug=True, host='localhost', port=5000)
